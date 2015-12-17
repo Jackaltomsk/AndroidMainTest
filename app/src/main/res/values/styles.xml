@@ -1,15 +1,16 @@
 <resources>
-    <!-- Base application theme. -->
+    <!-- Основное оформление -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/primary_text_material_light</item>
         <item name="android:textColorSecondary">@color/secondary_text_material_light</item>
     </style>
+    <!-- Стиль тулбара -->
     <style name="OptionsBackground.AppTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">@color/colorAccent</item>
         <item name="android:textColor">@color/primary_text_material_light</item>
     </style>
+
 </resources>

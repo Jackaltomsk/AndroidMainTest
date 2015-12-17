@@ -10,9 +10,10 @@
         android:icon="@mipmap/ic_school_black_48dp"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:launchMode="singleInstance">
 
-        <activity android:name=".activities.SplashActivity">
+        <activity android:name=".activities.SplashActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,11 +24,7 @@
         <activity
             android:name=".activities.MainActivity_"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
     </application>
