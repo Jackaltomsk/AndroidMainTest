@@ -14,9 +14,12 @@ import org.androidannotations.annotations.ViewById;
 import projects.my.maintest.R;
 
 @EActivity(R.layout.activity_splash)
+/**
+ * Активити стартового экрана.
+ */
 public class SplashActivity extends AppCompatActivity {
 
-    @ViewById(R.id.splash_id)
+    @ViewById(R.id.splashId)
     View layout;
 
     @AfterViews

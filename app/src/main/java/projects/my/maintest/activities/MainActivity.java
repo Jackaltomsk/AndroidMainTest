@@ -19,14 +19,14 @@ public class MainActivity extends AppCompatActivity {
     @ViewById
     ViewPager fragmentPager;
 
-    @ViewById(R.id.sliding_tabs)
-    TabLayout tabs;
+    @ViewById
+    TabLayout slidingTabs;
 
     @AfterViews
     void init() {
         ActivityUtils.setToolbar(this, false);
         initViewPager(fragmentPager);
-        setupTabs(tabs, fragmentPager);
+        setupTabs(slidingTabs, fragmentPager);
     }
 
     /**
