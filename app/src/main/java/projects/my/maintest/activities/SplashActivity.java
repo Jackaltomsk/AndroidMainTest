@@ -12,6 +12,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 import projects.my.maintest.R;
+import projects.my.maintest.db.infrastructure.DbManager;
 
 @EActivity(R.layout.activity_splash)
 /**
@@ -45,5 +46,10 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
         layout.startAnimation(anim);
+
+        // Создаем контекст единожды и для всего приложения.
+        // Уничтожать его явно смысла нет - учечка памяти ничтожна и будет ликвидирована
+        // по закрытии приложения.
+        if (!DbManager.isContextSet()) DbManager.setDbContext(getApplicationContext());
     }
 }

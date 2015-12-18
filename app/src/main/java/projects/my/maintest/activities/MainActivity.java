@@ -1,6 +1,5 @@
 package projects.my.maintest.activities;
 
-import android.app.Fragment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -35,12 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private void initViewPager(ViewPager pager) {
         MainTestAdapter pageAdapter = new MainTestAdapter(getFragmentManager());
         pager.setAdapter(pageAdapter);
-
-        // Пререндерим вью для фрагментов.
-        Fragment[] fragments = pageAdapter.getFragments();
-        for (int i = 0; i < fragments.length; i++) {
-            pageAdapter.instantiateItem(pager, i);
-        }
 
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
