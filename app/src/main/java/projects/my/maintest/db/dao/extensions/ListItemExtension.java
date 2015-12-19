@@ -2,6 +2,8 @@ package projects.my.maintest.db.dao.extensions;
 
 import android.util.Log;
 
+import com.j256.ormlite.dao.CloseableIterator;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -20,8 +22,8 @@ public class ListItemExtension extends BaseExtension<ListItem> {
     }
 
     /**
-     * Реализует получение осхраненных значений таймера.
-     * @return Возвращает массив значений времени.
+     * Реализует получение всех значений списка.
+     * @return Возвращает массив значений списка.
      */
     public ListItem[] getSavedItems() {
         try {
@@ -29,7 +31,40 @@ public class ListItemExtension extends BaseExtension<ListItem> {
             return items.toArray(new ListItem[items.size()]);
         }
         catch (SQLException e) {
-            Log.e(TAG, "Ошибка получения сохраненных таймеров");
+            Log.e(TAG, "Ошибка получения сохраненных значений.");
+            return null;
+        }
+    }
+
+    /**
+     * Реализует получение общее количество записей значений в БД.
+     * @return Возвращает количество записей.
+     */
+    public int getCount() {
+        try {
+            return (int) dao.countOf();
+        }
+        catch (SQLException e) {
+            Log.e(TAG, "Ошибка получения общего количества записей значений.");
+            return -1;
+        }
+    }
+
+    /**
+     * Реализует получение значения по указанному порядковому номеру.
+     * @param position Порядковый номер.
+     * @return Возвращает значение из БД.
+     */
+    public ListItem getItemAt(int position) {
+        try {
+            CloseableIterator<ListItem> iterator = dao.iterator();
+            ListItem item = iterator.moveRelative(position + 1);
+            iterator.close();
+            return item;
+        }
+        catch (SQLException e) {
+            Log.e(TAG, "Ошибка получения значения по порядковому номеру " +
+                    String.valueOf(position));
             return null;
         }
     }

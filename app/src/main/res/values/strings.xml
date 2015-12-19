@@ -1,3 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MainTest</string>
+    <string name="menu_fragment_list_add">Add</string>
+    <string name="popup_list_accept_item">Done</string>
+    <string name="popup_list_decline_item">Revert</string>
+    <string name="popup_list_edit_label">Item text</string>
 </resources>

@@ -1,6 +1,5 @@
 package projects.my.maintest.adapters;
 
-import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import projects.my.maintest.R;
 import projects.my.maintest.db.dao.GenericDao;
 import projects.my.maintest.db.dao.extensions.ListItemExtension;
-import projects.my.maintest.db.infrastructure.DbManager;
 import projects.my.maintest.db.models.ListItem;
 
 /**
@@ -22,26 +20,12 @@ import projects.my.maintest.db.models.ListItem;
  */
 public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.ViewHolder> {
     private static final String TAG = ListItemsAdapter.class.getSimpleName();
-
-    private ListItem[] dataset;
-    private GenericDao<ListItem> itemDao;
     private ListItemExtension ext;
-    private Activity activity;
     private RecyclerView.OnScrollListener viewScrollListener;
 
-
-    public ListItemsAdapter() {
-        itemDao = DbManager.getDbContext().getGenericDao(ListItem.class);
+    public ListItemsAdapter(GenericDao<ListItem> itemDao) {
         ext = new ListItemExtension(itemDao);
-        dataset = ext.getSavedItems();
     }
-    /*private void updateDataset(boolean isFirstPage, boolean getNext) {
-        GalleryImage[] data = getNext ? paginator.getNextPage() : paginator.getPrevPage();
-        if (data != null) dataset = data;
-
-        if (isFirstPage) this.notifyDataSetChanged();
-        else this.notifyItemRangeChanged(0, Paginator.ITEMS_PER_PAGE);
-    }*/
 
     /**
      * Данные элемента списка.
@@ -82,43 +66,6 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.View
         }
     }
 
-    /*public void init(ImageLoader imgLoader, Activity act) {
-        imageLoader = imgLoader;
-        activity = act;
-        paginator.setImgDatasetUpdatedListener(this);
-        paginator.fetchImages();
-        viewScrollListener = new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                GridLayoutManager lmgr = (GridLayoutManager) recyclerView.getLayoutManager();
-                if (dy > 0) //check for scroll down
-                {
-                    int lastItemPos = lmgr.findLastCompletelyVisibleItemPosition();
-                    int itemCount = lmgr.getItemCount();
-
-                    if (lastItemPos == (itemCount - 1)) {
-                        Log.v(TAG, "Достигнут конец страницы.");
-                        updateDataset(false, true);
-                        recyclerView.scrollToPosition(0);
-                        Toast.makeText(activity, "Страница " + paginator.getUiPage(),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else if (dy < 0) {
-                    if (lmgr.findFirstCompletelyVisibleItemPosition() == 0) {
-                        Log.v(TAG, "Достигнуто начало страницы.");
-                        updateDataset(false, false);
-                        if (paginator.getUiPage() > 0) {
-                            recyclerView.scrollToPosition(Paginator.ITEMS_PER_PAGE - 1);
-                        }
-                        Toast.makeText(activity, "Страница " + paginator.getUiPage(),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        };
-    }*/
-
     @Override
     public ListItemsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
@@ -129,7 +76,7 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final ListItem model = dataset[position];
+        final ListItem model = ext.getItemAt(position);
         holder.textView.setText(model.getText());
         holder.checkBox.setChecked(model.isChecked());
         holder.changeIcon(model.isChecked());
@@ -137,7 +84,7 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.View
 
     @Override
     public int getItemCount() {
-        return dataset.length;
+        return ext.getCount();
     }
 
     public RecyclerView.OnScrollListener getViewScrollListener() {

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="menu_fragment_list_add">Добавить</string>
+    <string name="popup_list_accept_item">Принять</string>
+    <string name="popup_list_decline_item">Отменить</string>
+    <string name="popup_list_edit_label">Значение элемента</string>
 </resources>
