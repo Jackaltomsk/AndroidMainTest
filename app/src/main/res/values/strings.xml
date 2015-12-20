@@ -5,4 +5,8 @@
     <string name="popup_list_accept_item">Done</string>
     <string name="popup_list_decline_item">Revert</string>
     <string name="popup_list_edit_label">Item text</string>
+    <string name="popup_dialog_title">Unsaved changes</string>
+    <string name="popup_dialog_message">The item has unsaved changes</string>
+    <string name="popup_dialog_save_btn">Save</string>
+    <string name="popup_dialog_cancel_btn">Discard</string>
 </resources>

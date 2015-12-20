@@ -70,8 +70,7 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.View
     public ListItemsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_list_recycler, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        return new ViewHolder(v);
     }
 
     @Override

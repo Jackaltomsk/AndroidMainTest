@@ -8,18 +8,37 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.ArrayList;
+
 import projects.my.maintest.R;
 import projects.my.maintest.adapters.MainTestAdapter;
 import projects.my.maintest.common.ActivityUtils;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BackPressedListeners {
 
     @ViewById
     ViewPager fragmentPager;
 
     @ViewById
     TabLayout slidingTabs;
+
+    /**
+     * Слушатели события нажатия кнопки "назад".
+     */
+    private final ArrayList<BackPressedListener> backPressedListeners = new ArrayList<>();
+
+    public void addBackPressedListener(BackPressedListener listener) {
+        if (listener != null && !backPressedListeners.contains(listener)) {
+            backPressedListeners.add(listener);
+        }
+    }
+
+    public void removeBackPressedListener(BackPressedListener listener) {
+        if (listener != null) {
+            backPressedListeners.remove(listener);
+        }
+    }
 
     @AfterViews
     void init() {
@@ -49,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        for (BackPressedListener ls : backPressedListeners) {
+            if (ls.onBackPressed()) return;
+        }
+        super.onBackPressed();
     }
 
     /**

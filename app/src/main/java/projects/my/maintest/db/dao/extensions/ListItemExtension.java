@@ -58,7 +58,7 @@ public class ListItemExtension extends BaseExtension<ListItem> {
     public ListItem getItemAt(int position) {
         try {
             CloseableIterator<ListItem> iterator = dao.iterator();
-            ListItem item = iterator.moveRelative(position + 1);
+            ListItem item = iterator.moveRelative(position);
             iterator.close();
             return item;
         }

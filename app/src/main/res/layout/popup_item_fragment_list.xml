@@ -2,10 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:paddingLeft="@dimen/standard_element_half_margin"
+    android:paddingRight="@dimen/standard_element_half_margin">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,16 +18,16 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/popup_list_decline_item"
-        android:layout_below="@id/popupItemText"
-        android:layout_alignParentStart="true"
-        android:id="@+id/btnDeclinePopupItem" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/popup_list_accept_item"
         android:layout_below="@id/popupItemText"
         android:layout_alignParentEnd="true"
-        android:id="@+id/btnAcceptPopupItem" />
-
+        android:id="@+id/btnAcceptPopupItem"
+         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/popup_list_decline_item"
+        android:layout_below="@id/popupItemText"
+        android:layout_toStartOf="@id/btnAcceptPopupItem"
+        android:id="@+id/btnDeclinePopupItem" />
 </RelativeLayout>

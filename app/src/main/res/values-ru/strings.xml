@@ -4,4 +4,8 @@
     <string name="popup_list_accept_item">Принять</string>
     <string name="popup_list_decline_item">Отменить</string>
     <string name="popup_list_edit_label">Значение элемента</string>
+    <string name="popup_dialog_title">Несохраненные данные</string>
+    <string name="popup_dialog_message">В элемент внесены изменения</string>
+    <string name="popup_dialog_save_btn">Сохранить</string>
+    <string name="popup_dialog_cancel_btn">Отказаться</string>
 </resources>
