@@ -3,11 +3,7 @@ package projects.my.maintest.adapters;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
-import android.view.ViewGroup;
 
-import java.util.Arrays;
-
-import projects.my.maintest.fragments.FragmentCommon;
 import projects.my.maintest.fragments.ListFragment_;
 import projects.my.maintest.fragments.MapFragment_;
 import projects.my.maintest.fragments.ScalingFragment_;

@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -79,10 +78,8 @@ public class ListFragment extends Fragment implements FragmentCommon {
                         });
                     }
                 });
-                Toast.makeText(getActivity(), "Long click", Toast.LENGTH_SHORT).show();
             }
         });
-        //registerForContextMenu(listRecyclerView);
         listRecyclerView.setHasFixedSize(true);
         listRecyclerView.setVerticalScrollBarEnabled(true);
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),

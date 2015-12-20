@@ -3,6 +3,7 @@ package projects.my.maintest.popups;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -43,6 +44,7 @@ public class ListItemPopup extends android.widget.PopupWindow {
         this.modelChangeListener = modelChangeListener;
     }
 
+    @SuppressWarnings("deprecation")
     public ListItemPopup(Context context, ListItem model) throws NullPointerException {
         super(context);
         if (model == null) throw new NullPointerException("Не передана модель.");
@@ -57,6 +59,8 @@ public class ListItemPopup extends android.widget.PopupWindow {
 
         createListeners();
         editText.setText(model.getText());
+        this.setBackgroundDrawable(new ColorDrawable(ctx.getResources()
+                .getColor(R.color.background_material)));
         this.setFocusable(true);
         this.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }

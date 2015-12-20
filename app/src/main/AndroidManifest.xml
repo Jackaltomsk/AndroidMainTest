@@ -23,8 +23,15 @@
 
         <activity
             android:name=".activities.MainActivity_"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:configChanges="locale|orientation" />
 
+        <activity
+            android:name=".activities.PreferencesActivity_"
+            android:label="@string/pref_activity_name"
+            android:configChanges="locale|orientation">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity_" />
         </activity>
 
     </application>

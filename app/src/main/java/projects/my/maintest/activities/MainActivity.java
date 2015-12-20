@@ -1,11 +1,14 @@
 package projects.my.maintest.activities;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import projects.my.maintest.adapters.MainTestAdapter;
 import projects.my.maintest.common.ActivityUtils;
 
 @EActivity(R.layout.activity_main)
+@OptionsMenu(R.menu.activity_main)
 public class MainActivity extends AppCompatActivity implements BackPressedListeners {
 
     @ViewById
@@ -45,6 +49,12 @@ public class MainActivity extends AppCompatActivity implements BackPressedListen
         ActivityUtils.setToolbar(this, false);
         initViewPager(fragmentPager);
         setupTabs(slidingTabs, fragmentPager);
+    }
+
+    @OptionsItem(R.id.menuPrefCall)
+    void startPref() {
+        Intent prefIntent = new Intent(this, PreferencesActivity_.class);
+        startActivity(prefIntent);
     }
 
     /**

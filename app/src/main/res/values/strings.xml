@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MainTest</string>
+    <string name="pref_activity_name">Prefs</string>
     <string name="menu_fragment_list_add">Add</string>
+    <string name="menu_activity_main_pref">Preferences</string>
     <string name="popup_list_accept_item">Done</string>
     <string name="popup_list_decline_item">Revert</string>
     <string name="popup_list_edit_label">Item text</string>
@@ -10,4 +12,11 @@
     <string name="popup_dialog_save_btn">Save</string>
     <string name="context_menu_item_edit">Edit</string>
     <string name="context_menu_item_delete">Delete</string>
+    <string name="preferences_lang_list">Localization</string>
+    <string name="preferences_lang_list_summary">List of language localizations</string>
+    <string name="preferences_chosen_lang">preferences_chosen_lang</string>
+    <string-array name="locals">
+        <item>en</item>
+        <item>ru</item>
+    </string-array>
 </resources>
