@@ -6,6 +6,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/primary_text_material_light</item>
         <item name="android:textColorSecondary">@color/secondary_text_material_light</item>
+        <item name="android:colorBackground">@color/background_material</item>
     </style>
     <!-- Стиль тулбара -->
     <style name="OptionsBackground.AppTheme" parent="ThemeOverlay.AppCompat.Light">

@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/standard_element_margin"
     android:paddingBottom="@dimen/standard_element_margin"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:background="@drawable/button_ripple" >
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

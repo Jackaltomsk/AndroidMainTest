@@ -8,5 +8,6 @@
     <string name="popup_dialog_title">Unsaved changes</string>
     <string name="popup_dialog_message">The item has unsaved changes</string>
     <string name="popup_dialog_save_btn">Save</string>
-    <string name="popup_dialog_cancel_btn">Discard</string>
+    <string name="context_menu_item_edit">Edit</string>
+    <string name="context_menu_item_delete">Delete</string>
 </resources>

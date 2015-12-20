@@ -21,7 +21,25 @@ import projects.my.maintest.db.models.ListItem;
 public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.ViewHolder> {
     private static final String TAG = ListItemsAdapter.class.getSimpleName();
     private ListItemExtension ext;
-    private RecyclerView.OnScrollListener viewScrollListener;
+    private OnClickListener clickListener;
+
+    /**
+     * Интерфейс слушателя событий клика по элементу списка.
+     */
+    public interface OnClickListener {
+        /**
+         * Обычный клик.
+         * @param modelId Идентификатор модели, отождествленной с элементом.
+         */
+        void onClick(int modelId);
+
+        /**
+         * Долгий клик.
+         * @param v Вью, на котором произошло событие.
+         * @param modelId Идентификатор модели, отождествленной с элементом.
+         */
+        void onLongClick(View v, int modelId);
+    }
 
     public ListItemsAdapter(GenericDao<ListItem> itemDao) {
         ext = new ListItemExtension(itemDao);
@@ -35,13 +53,16 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.View
         private ImageView imageView;
         private TextView textView;
         private CheckBox checkBox;
+        private int modelId;
+        private OnClickListener clickListener;
 
-        public ViewHolder(LinearLayout v) {
+        public ViewHolder(LinearLayout v, OnClickListener listener) {
             super(v);
             itemView = v;
             imageView = (ImageView) v.findViewById(R.id.recyclerItemIcon);
             textView = (TextView) v.findViewById(R.id.recyclerItemText);
             checkBox = (CheckBox) v.findViewById(R.id.recyclerItemCheckBox);
+            clickListener = listener;
             createListeners();
         }
 
@@ -49,13 +70,21 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.View
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    ext.saveIsChecked(ViewHolder.this.modelId, isChecked);
                     changeIcon(isChecked);
                 }
             });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    clickListener.onClick(modelId);
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    clickListener.onLongClick(v, modelId);
+                    return false;
                 }
             });
         }
@@ -70,12 +99,13 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.View
     public ListItemsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_list_recycler, parent, false);
-        return new ViewHolder(v);
+        return new ViewHolder(v, clickListener);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final ListItem model = ext.getItemAt(position);
+        holder.modelId = model.getId();
         holder.textView.setText(model.getText());
         holder.checkBox.setChecked(model.isChecked());
         holder.changeIcon(model.isChecked());
@@ -86,7 +116,11 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.View
         return ext.getCount();
     }
 
-    public RecyclerView.OnScrollListener getViewScrollListener() {
-        return viewScrollListener;
+    /**
+     * Устанавливает обработчик осбытий по клику и долгому клику на элемент списка.
+     * @param clickListener Обработчик событий кликов.
+     */
+    public void setClickListener(OnClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 }

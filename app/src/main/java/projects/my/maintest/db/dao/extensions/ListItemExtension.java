@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import projects.my.maintest.db.dao.GenericDao;
+import projects.my.maintest.db.models.BaseEntity;
 import projects.my.maintest.db.models.ListItem;
 
 /**
@@ -57,7 +58,8 @@ public class ListItemExtension extends BaseExtension<ListItem> {
      */
     public ListItem getItemAt(int position) {
         try {
-            CloseableIterator<ListItem> iterator = dao.iterator();
+            CloseableIterator<ListItem> iterator = dao.queryBuilder()
+                    .orderBy(BaseEntity.ID_FIELD, true).iterator();
             ListItem item = iterator.moveRelative(position);
             iterator.close();
             return item;
@@ -66,6 +68,23 @@ public class ListItemExtension extends BaseExtension<ListItem> {
             Log.e(TAG, "Ошибка получения значения по порядковому номеру " +
                     String.valueOf(position));
             return null;
+        }
+    }
+
+    /**
+     * Реализует обновление поля модели.
+     * @param id Идентификатор модели.
+     * @param isChecked Состояние поля.
+     */
+    public void saveIsChecked(int id, boolean isChecked) {
+        try {
+            ListItem item = dao.queryForId(id);
+            if (item != null && (item.isChecked() != isChecked)) {
+                item.setIsChecked(isChecked);
+                dao.createOrUpdate(item);
+            }
+        } catch (SQLException e) {
+            Log.e(TAG, "Ошибка сохранения модели: " + e);
         }
     }
 }

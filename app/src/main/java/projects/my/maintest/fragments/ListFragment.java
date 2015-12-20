@@ -5,8 +5,10 @@ import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-
-import com.j256.ormlite.dao.Dao;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -46,6 +48,41 @@ public class ListFragment extends Fragment implements FragmentCommon {
     void init() {
         itemDao = DbManager.getDbContext().getGenericDao(ListItem.class);
         adapter = new ListItemsAdapter(itemDao);
+        adapter.setClickListener(new ListItemsAdapter.OnClickListener() {
+            @Override
+            public void onClick(int modelId) {
+                editPopup(modelId);
+            }
+
+            @Override
+            public void onLongClick(View v, final int modelId) {
+                registerForContextMenu(v);
+                v.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+                    @Override
+                    public void onCreateContextMenu(ContextMenu menu, View v,
+                                                    ContextMenu.ContextMenuInfo menuInfo) {
+                        MenuItem edit = menu.add(R.string.context_menu_item_edit);
+                        final MenuItem delete = menu.add(R.string.context_menu_item_delete);
+                        edit.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                editPopup(modelId);
+                                return true;
+                            }
+                        });
+                        delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                deleteElement(modelId);
+                                return true;
+                            }
+                        });
+                    }
+                });
+                Toast.makeText(getActivity(), "Long click", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //registerForContextMenu(listRecyclerView);
         listRecyclerView.setHasFixedSize(true);
         listRecyclerView.setVerticalScrollBarEnabled(true);
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
@@ -55,7 +92,10 @@ public class ListFragment extends Fragment implements FragmentCommon {
 
     @OptionsItem(R.id.menuFragmentListAdd)
     void addItem() {
-        final ListItem model = new ListItem();
+        createPopup(new ListItem());
+    }
+
+    private void createPopup(final ListItem model) {
         ListItemPopup popup = new ListItemPopup(getActivity(), model);
         popup.setOnModelChangeListener(new ListItemPopup.OnModelChangeListener() {
             @Override
@@ -69,5 +109,26 @@ public class ListFragment extends Fragment implements FragmentCommon {
             }
         });
         popup.show(this.getView());
+    }
+
+    private void editPopup(int modelId) {
+        try {
+            ListItem model = itemDao.queryForId(modelId);
+            createPopup(model);
+        } catch (SQLException e) {
+            Log.e(TAG, "Ошибка получения значения по идентификатору" +
+                    String.valueOf(modelId));
+        }
+    }
+
+    private void deleteElement(int modelId) {
+        try {
+            ListItem model = itemDao.queryForId(modelId);
+            itemDao.delete(model);
+            adapter.notifyDataSetChanged();
+        } catch (SQLException e) {
+            Log.e(TAG, "Ошибка получения значения по идентификатору" +
+                    String.valueOf(modelId));
+        }
     }
 }

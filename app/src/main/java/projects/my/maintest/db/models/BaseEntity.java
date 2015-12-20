@@ -6,8 +6,9 @@ import com.j256.ormlite.field.DatabaseField;
  * Абстрактный родитель сущностей БД.
  */
 public abstract class BaseEntity {
+    public final static String ID_FIELD = "id";
 
-    @DatabaseField(generatedId = true)
+    @DatabaseField(columnName = ID_FIELD, generatedId = true)
     protected int id;
 
     public int getId() {
