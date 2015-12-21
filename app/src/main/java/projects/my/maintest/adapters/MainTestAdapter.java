@@ -4,8 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 
-import projects.my.maintest.fragments.GMapFragment_;
 import projects.my.maintest.fragments.ListFragment_;
+import projects.my.maintest.fragments.LocationFragment_;
 import projects.my.maintest.fragments.ScalingFragment_;
 import projects.my.maintest.fragments.ServiceFragment_;
 
@@ -26,7 +26,7 @@ public class MainTestAdapter extends FragmentPagerAdapter {
             case 0: return new ListFragment_();
             case 1: return new ScalingFragment_();
             case 2: return new ServiceFragment_();
-            case 3: return new GMapFragment_();
+            case 3: return new LocationFragment_();
             default:
                 throw new IndexOutOfBoundsException(String.valueOf(position));
         }
