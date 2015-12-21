@@ -46,4 +46,8 @@ dependencies {
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'com.google.android.gms:play-services-maps:8.1.0'
     compile 'com.android.support:support-v4:23.1.1'
+    compile ('com.stanfy:gson-xml-java:0.1.7'){
+        exclude group: 'xmlpull', module: 'xmlpull'
+    }
+    compile 'com.google.code.gson:gson:2.5'
 }
