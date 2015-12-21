@@ -32,7 +32,7 @@ public class AppPreferencesFragment extends PreferenceFragment {
 
     @PreferenceChange(R.string.preferences_chosen_lang)
     void langChanges(Preference preference, String newValue) {
-        if (!prefList.getValue().equals(newValue)) {
+        if (prefList.getValue() == null || !prefList.getValue().equals(newValue)) {
             prefList.setSummary(newValue);
             ActivityUtils.setLocale(getActivity(), newValue);
             getActivity().recreate();

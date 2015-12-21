@@ -1,9 +1,11 @@
 package projects.my.maintest.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -20,6 +22,8 @@ import projects.my.maintest.common.ActivityUtils;
 @EActivity(R.layout.activity_main)
 @OptionsMenu(R.menu.activity_main)
 public class MainActivity extends AppCompatActivity implements BackPressedListeners {
+
+    public final static int PERMISSIONS_REQUEST_FINE_LOCATION = 1;
 
     @ViewById
     ViewPager fragmentPager;
@@ -86,6 +90,25 @@ public class MainActivity extends AppCompatActivity implements BackPressedListen
             if (ls.onBackPressed()) return;
         }
         super.onBackPressed();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Получено ращрешение на точное определение местоположения",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+
+                    Toast.makeText(this, "Отказано в разрешении на определение местоположения",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     /**
