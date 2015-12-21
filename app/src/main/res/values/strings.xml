@@ -10,6 +10,7 @@
     <string name="popup_dialog_title">Unsaved changes</string>
     <string name="popup_dialog_message">The item has unsaved changes</string>
     <string name="popup_dialog_save_btn">Save</string>
+    <string name="popup_dialog_cancel_btn">Forget</string>
     <string name="context_menu_item_edit">Edit</string>
     <string name="context_menu_item_delete">Delete</string>
     <string name="preferences_lang_list">Localization</string>
@@ -19,7 +20,4 @@
         <item>en</item>
         <item>ru</item>
     </string-array>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

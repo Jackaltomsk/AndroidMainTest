@@ -1,5 +1,6 @@
 package projects.my.maintest.popups;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import projects.my.maintest.R;
+import projects.my.maintest.common.ActivityUtils;
 import projects.my.maintest.db.models.ListItem;
 
 /**
@@ -47,13 +49,14 @@ public class ListItemPopup extends android.widget.PopupWindow {
 
     @SuppressWarnings("deprecation")
     public ListItemPopup(Context context, ListItem model) throws NullPointerException {
-        super(context);
+        super(LayoutInflater.from(context).inflate(R.layout.popup_item_fragment_list, null),
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
         if (model == null) throw new NullPointerException("Не передана модель.");
         this.model = model;
         ctx = context;
 
-        popupView = LayoutInflater.from(context).inflate(R.layout.popup_item_fragment_list, null);
-        setContentView(popupView);
+        popupView = this.getContentView();
         btnDecline = (Button) popupView.findViewById(R.id.btnDeclinePopupItem);
         btnAccept = (Button) popupView.findViewById(R.id.btnAcceptPopupItem);
         editText = (EditText) popupView.findViewById(R.id.popupItemText);
@@ -65,7 +68,6 @@ public class ListItemPopup extends android.widget.PopupWindow {
         this.setFocusable(true);
         this.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }
-
 
     private void createListeners() {
         this.setTouchInterceptor(new View.OnTouchListener() {

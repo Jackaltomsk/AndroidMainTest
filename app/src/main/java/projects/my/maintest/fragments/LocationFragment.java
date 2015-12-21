@@ -80,7 +80,7 @@ public class LocationFragment extends Fragment implements FragmentCommon {
 
     @AfterViews
     void init() {
-        mapView.onCreate(null);
+        mapView.onCreate(this.getArguments());
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(final GoogleMap googleMap) {
