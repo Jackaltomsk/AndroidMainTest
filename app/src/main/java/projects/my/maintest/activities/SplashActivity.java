@@ -1,5 +1,6 @@
 package projects.my.maintest.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,8 @@ import projects.my.maintest.R;
 import projects.my.maintest.common.ActivityUtils;
 import projects.my.maintest.db.infrastructure.DbManager;
 
+@SuppressLint("Registered")
+@SuppressWarnings("WeakerAccess")
 @EActivity(R.layout.activity_splash)
 /**
  * Активити стартового экрана.

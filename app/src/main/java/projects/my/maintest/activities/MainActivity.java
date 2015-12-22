@@ -1,32 +1,49 @@
 package projects.my.maintest.activities;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import projects.my.maintest.R;
 import projects.my.maintest.adapters.MainTestAdapter;
 import projects.my.maintest.common.ActivityUtils;
 import projects.my.maintest.fragments.Constants;
 
+@SuppressLint("Registered")
+@SuppressWarnings({"WeakerAccess", "NullableProblems"})
 @EActivity(R.layout.activity_main)
 @OptionsMenu(R.menu.activity_main)
 public class MainActivity extends AppCompatActivity implements BackPressedListeners {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     public final static int PERMISSIONS_REQUEST_FINE_LOCATION = 1;
     public final static int PERMISSIONS_REQUEST_CAMERA = 2;
+    public final static int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 3;
+    public final static int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 4;
 
     @ViewById
     ViewPager fragmentPager;
@@ -100,7 +117,9 @@ public class MainActivity extends AppCompatActivity implements BackPressedListen
                                             String permissions[], int[] grantResults) {
         switch (requestCode) {
             case PERMISSIONS_REQUEST_FINE_LOCATION:
-            case PERMISSIONS_REQUEST_CAMERA: {
+            case PERMISSIONS_REQUEST_CAMERA:
+            case PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE:
+            case PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, R.string.permission_granted, Toast.LENGTH_SHORT).show();
@@ -143,13 +162,37 @@ public class MainActivity extends AppCompatActivity implements BackPressedListen
                     Intent glIntent = new Intent(this, ScalingActivity_.class);
                     glIntent.setData(data.getData());
                     startActivity(glIntent);
+                    break;
                 case Constants.REQ_CODE_IMG_FROM_CAMERA:
-                    /*Intent cmIntent = new Intent(this, ScalingActivity_.class);
-
-                    cmIntent.putExtra(Constants.EXTRAS_DATA_NAME,
-                            data.getExtras().get(Constants.EXTRAS_DATA_NAME));*/
-
+                    ActivityUtils.requestPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            MainActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+                    try {
+                        Bitmap photo = (Bitmap) data.getExtras().get(Constants.EXTRAS_DATA_NAME);
+                        File file = createImageFile();
+                        FileOutputStream out = new FileOutputStream(file);
+                        //noinspection ConstantConditions
+                        photo.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                        out.close();
+                        Intent cmIntent = new Intent(this, ScalingActivity_.class);
+                        cmIntent.setData(Uri.fromFile(file));
+                        startActivity(cmIntent);
+                    }
+                    catch (IOException e) {
+                        Log.e(TAG, "Ошибка создания файла для записи изображения с камеры: " + e);
+                    }
+                    catch (NullPointerException e) {
+                        Log.e(TAG, "Ошибка создания сжатия изображения с камеры: " + e);
+                    }
             }
         }
+    }
+
+    private File createImageFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                getResources().getConfiguration().locale).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        return File.createTempFile(imageFileName, ".jpg", storageDir);
     }
 }

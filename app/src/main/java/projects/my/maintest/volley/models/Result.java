@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * Модель ответа.
  */
+@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 public class Result {
     private int totalPages;
     private List<Quote> quotes;

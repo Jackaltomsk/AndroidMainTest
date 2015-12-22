@@ -5,5 +5,4 @@
     <dimen name="toolbar_elevation">4dp</dimen>
     <dimen name="standard_element_margin">8dp</dimen>
     <dimen name="standard_element_half_margin">4dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
 </resources>

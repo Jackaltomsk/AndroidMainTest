@@ -31,6 +31,7 @@ import projects.my.maintest.volley.models.Result;
 /**
  * Фрагмент отображения рассылки, загруженной сервисом.
  */
+@SuppressWarnings("WeakerAccess")
 @EFragment(R.layout.fragment_service)
 public class ServiceFragment extends Fragment implements FragmentCommon {
     private static final String TAG = ServiceFragment.class.getSimpleName();
@@ -120,7 +121,8 @@ public class ServiceFragment extends Fragment implements FragmentCommon {
             @Override
             public void onServiceDisconnected(ComponentName arg0) {
                 bound = false;
-                if (btnStartServiceRead != null) btnStartServiceRead.setEnabled(bound);
+                if (btnStartServiceRead != null) //noinspection ConstantConditions
+                    btnStartServiceRead.setEnabled(bound);
             }
         };
         getActivity().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);

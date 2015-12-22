@@ -1,6 +1,6 @@
 package projects.my.maintest.popups;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,12 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import projects.my.maintest.R;
-import projects.my.maintest.common.ActivityUtils;
 import projects.my.maintest.db.models.ListItem;
 
 /**
  * Всплывающее окно для работы с моделью ListItem.
  */
+@SuppressWarnings("WeakerAccess")
 public class ListItemPopup extends android.widget.PopupWindow {
     Context ctx;
     View popupView;
@@ -47,6 +47,7 @@ public class ListItemPopup extends android.widget.PopupWindow {
         this.modelChangeListener = modelChangeListener;
     }
 
+    @SuppressLint("InflateParams")
     @SuppressWarnings("deprecation")
     public ListItemPopup(Context context, ListItem model) throws NullPointerException {
         super(LayoutInflater.from(context).inflate(R.layout.popup_item_fragment_list, null),

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">MainTest</string>
-    <string name="pref_activity_name">Prefs</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:ignore="MissingTranslation">MainTest</string>
+    <string name="pref_activity_name" tools:ignore="MissingTranslation">Prefs</string>
     <string name="menu_fragment_list_add">Add</string>
     <string name="menu_activity_main_pref">Preferences</string>
     <string name="popup_list_accept_item">Done</string>
@@ -15,7 +15,7 @@
     <string name="context_menu_item_delete">Delete</string>
     <string name="preferences_lang_list">Localization</string>
     <string name="preferences_lang_list_summary">List of language localizations</string>
-    <string name="preferences_chosen_lang">preferences_chosen_lang</string>
+    <string name="preferences_chosen_lang" tools:ignore="MissingTranslation">preferences_chosen_lang</string>
     <string name="fragment_service_start_btn">Get feed</string>
     <string name="toast_feed_error_loading">Unable to download feed</string>
     <string name="fragment_scaling_gallery_desc">Gallery</string>
@@ -23,10 +23,10 @@
     <string name="toast_no_camera_found">No camera found</string>
     <string name="permission_granted">Permission granted</string>
     <string name="permission_revoked">Permission revoked</string>
-    <string-array name="locals">
+    <string-array name="locals" tools:ignore="MissingTranslation">
         <item>en</item>
         <item>ru</item>
     </string-array>
-    <string name="title_activity_scaling">ScalingActivity</string>
+    <string name="title_activity_scaling" tools:ignore="MissingTranslation">ScalingActivity</string>
 </resources>
 

@@ -30,7 +30,7 @@ public class DbManager {
     /**
      * Реализует удаление БД
      * @param context Текущий контекст приложения.
-     * @return
+     * @return Признак удаления БД.
      */
     public static boolean deleteDb(Context context) {
         return context.deleteDatabase(DbContext.DATABASE_NAME);

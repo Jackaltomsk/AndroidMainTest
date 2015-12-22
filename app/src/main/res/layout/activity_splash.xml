@@ -6,9 +6,11 @@
     android:gravity="center_horizontal|center_vertical"
     android:background="@color/colorPrimary"
     android:id="@+id/splashId"
-    tools:context=".activities.SplashActivity">
+    tools:context=".activities.SplashActivity"
+    tools:ignore="Overdraw">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_school_white_48dp" />
+        android:background="@drawable/ic_school_white_48dp"
+        tools:ignore="ContentDescription" />
 </LinearLayout>

@@ -2,18 +2,13 @@ package projects.my.maintest.fragments;
 
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -33,10 +28,12 @@ import org.androidannotations.annotations.ViewById;
 
 import projects.my.maintest.R;
 import projects.my.maintest.activities.MainActivity;
+import projects.my.maintest.common.ActivityUtils;
 
 /**
  * Фрагмент карты и текста с координатами.
  */
+@SuppressWarnings("WeakerAccess")
 @EFragment(R.layout.fragment_location)
 public class LocationFragment extends Fragment implements FragmentCommon {
     private static final String TAG = LocationFragment.class.getSimpleName();
@@ -84,7 +81,9 @@ public class LocationFragment extends Fragment implements FragmentCommon {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(final GoogleMap googleMap) {
-                requestPermissions();
+                ActivityUtils.requestPermissions(getActivity(),
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        MainActivity.PERMISSIONS_REQUEST_FINE_LOCATION);
                 UiSettings settings = googleMap.getUiSettings();
                 settings.setZoomControlsEnabled(true);
                 settings.setMyLocationButtonEnabled(true);
@@ -167,19 +166,6 @@ public class LocationFragment extends Fragment implements FragmentCommon {
             Log.e(TAG, "Ошибка определения местоположения: ", ex);
         }
         return true;
-    }
-
-    private void requestPermissions() {
-        // Запросим подтверждение у пользователя, если у нас >= 23.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Activity act = getActivity();
-            if (ContextCompat.checkSelfPermission(act, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(act,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MainActivity.PERMISSIONS_REQUEST_FINE_LOCATION);
-            }
-        }
     }
 
     public void setCoordinates(double latitude, double longitude) {

@@ -1,5 +1,6 @@
 package projects.my.maintest.services;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
@@ -30,6 +31,8 @@ import projects.my.maintest.volley.models.Result;
 /**
  * Сервис загрузки рассылки.
  */
+@SuppressLint("Registered")
+@SuppressWarnings("WeakerAccess")
 @EService
 public class FeedService extends Service implements FeedServiceContract {
     private static final String TAG = FeedService.class.getSimpleName();

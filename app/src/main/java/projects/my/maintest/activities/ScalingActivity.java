@@ -1,5 +1,6 @@
 package projects.my.maintest.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -14,6 +15,8 @@ import org.androidannotations.annotations.ViewById;
 import projects.my.maintest.R;
 import projects.my.maintest.common.ActivityUtils;
 
+@SuppressLint("Registered")
+@SuppressWarnings("WeakerAccess")
 @EActivity(R.layout.activity_scaling)
 public class ScalingActivity extends AppCompatActivity {
 
@@ -32,7 +35,7 @@ public class ScalingActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Uri uri = intent.getData();
         if (uri != null) {
-            String imagePath = "";
+            String imagePath;
             String[] imgData = { MediaStore.Images.Media.DATA };
             Cursor cursor = getContentResolver().query(uri, imgData, null, null, null);
 
@@ -40,6 +43,7 @@ public class ScalingActivity extends AppCompatActivity {
                 int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                 cursor.moveToFirst();
                 imagePath = cursor.getString(index);
+                cursor.close();
             }
             else imagePath = uri.getPath();
             scalingWebView.loadUrl("file:///" + imagePath);

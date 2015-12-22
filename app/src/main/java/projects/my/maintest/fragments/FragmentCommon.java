@@ -3,6 +3,7 @@ package projects.my.maintest.fragments;
 /**
  * Обобщающий интерфейс фрагментов в пейджере.
  */
+@SuppressWarnings("WeakerAccess")
 public interface FragmentCommon {
 
     /**

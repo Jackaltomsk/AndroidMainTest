@@ -8,6 +8,7 @@ import projects.my.maintest.db.models.BaseEntity;
 /**
  * Суперкласс для расширений станлартного репозитория.
  */
+@SuppressWarnings("WeakerAccess")
 public abstract class BaseExtension<T extends BaseEntity> implements Closeable {
 
     protected GenericDao<T> dao;

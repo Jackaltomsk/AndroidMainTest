@@ -16,6 +16,7 @@ import projects.my.maintest.common.ActivityUtils;
 /**
  * Фрагмент настроек.
  */
+@SuppressWarnings("WeakerAccess")
 @EFragment
 @PreferenceScreen(R.xml.preferences)
 public class AppPreferencesFragment extends PreferenceFragment {

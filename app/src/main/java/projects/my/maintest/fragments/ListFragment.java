@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -28,6 +27,7 @@ import projects.my.maintest.popups.ListItemPopup;
 /**
  * Фрагмент со списком значений.
  */
+@SuppressWarnings("WeakerAccess")
 @EFragment(R.layout.fragment_list)
 @OptionsMenu(R.menu.fragment_list)
 public class ListFragment extends Fragment implements FragmentCommon {

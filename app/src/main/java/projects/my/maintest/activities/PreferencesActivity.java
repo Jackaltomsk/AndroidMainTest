@@ -1,5 +1,6 @@
 package projects.my.maintest.activities;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 
 import org.androidannotations.annotations.AfterViews;
@@ -9,6 +10,7 @@ import projects.my.maintest.R;
 import projects.my.maintest.common.ActivityUtils;
 import projects.my.maintest.fragments.AppPreferencesFragment_;
 
+@SuppressLint("Registered")
 @EActivity(R.layout.activity_preferences)
 public class PreferencesActivity extends AppCompatActivity {
 
