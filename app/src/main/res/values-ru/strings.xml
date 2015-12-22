@@ -15,4 +15,9 @@
     <string name="preferences_lang_list_summary">Список локализаций</string>
     <string name="fragment_service_start_btn">Получить</string>
     <string name="toast_feed_error_loading">Невозможно получить рассылку</string>
+    <string name="fragment_scaling_gallery_desc">Галерея</string>
+    <string name="fragment_scaling_camera_desc">Камера</string>
+    <string name="toast_no_camera_found">Отсутствует камера</string>
+    <string name="permission_granted">Разрешение получено</string>
+    <string name="permission_revoked">Разрешение отозвано</string>
 </resources>

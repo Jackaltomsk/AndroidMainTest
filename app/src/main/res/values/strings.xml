@@ -18,8 +18,15 @@
     <string name="preferences_chosen_lang">preferences_chosen_lang</string>
     <string name="fragment_service_start_btn">Get feed</string>
     <string name="toast_feed_error_loading">Unable to download feed</string>
+    <string name="fragment_scaling_gallery_desc">Gallery</string>
+    <string name="fragment_scaling_camera_desc">Camera</string>
+    <string name="toast_no_camera_found">No camera found</string>
+    <string name="permission_granted">Permission granted</string>
+    <string name="permission_revoked">Permission revoked</string>
     <string-array name="locals">
         <item>en</item>
         <item>ru</item>
     </string-array>
+    <string name="title_activity_scaling">ScalingActivity</string>
 </resources>
+

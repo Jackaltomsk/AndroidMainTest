@@ -2,6 +2,7 @@ package projects.my.maintest.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -18,12 +19,14 @@ import java.util.ArrayList;
 import projects.my.maintest.R;
 import projects.my.maintest.adapters.MainTestAdapter;
 import projects.my.maintest.common.ActivityUtils;
+import projects.my.maintest.fragments.Constants;
 
 @EActivity(R.layout.activity_main)
 @OptionsMenu(R.menu.activity_main)
 public class MainActivity extends AppCompatActivity implements BackPressedListeners {
 
     public final static int PERMISSIONS_REQUEST_FINE_LOCATION = 1;
+    public final static int PERMISSIONS_REQUEST_CAMERA = 2;
 
     @ViewById
     ViewPager fragmentPager;
@@ -94,18 +97,16 @@ public class MainActivity extends AppCompatActivity implements BackPressedListen
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case PERMISSIONS_REQUEST_FINE_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
+            case PERMISSIONS_REQUEST_FINE_LOCATION:
+            case PERMISSIONS_REQUEST_CAMERA: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Получено ращрешение на точное определение местоположения",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-
-                    Toast.makeText(this, "Отказано в разрешении на определение местоположения",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.permission_granted, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(this, R.string.permission_revoked, Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -131,5 +132,24 @@ public class MainActivity extends AppCompatActivity implements BackPressedListen
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case Constants.REQ_CODE_IMG_FROM_GALLERY:
+                    Intent glIntent = new Intent(this, ScalingActivity_.class);
+                    glIntent.setData(data.getData());
+                    startActivity(glIntent);
+                case Constants.REQ_CODE_IMG_FROM_CAMERA:
+                    /*Intent cmIntent = new Intent(this, ScalingActivity_.class);
+
+                    cmIntent.putExtra(Constants.EXTRAS_DATA_NAME,
+                            data.getExtras().get(Constants.EXTRAS_DATA_NAME));*/
+
+            }
+        }
     }
 }
