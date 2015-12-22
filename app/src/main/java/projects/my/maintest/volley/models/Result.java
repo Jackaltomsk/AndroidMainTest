@@ -22,4 +22,8 @@ public class Result {
         if (position >= quotes.size() || position < 0) return null;
         return quotes.get(position);
     }
+
+    public int getQuotesCount() {
+        return quotes.size();
+    }
 }

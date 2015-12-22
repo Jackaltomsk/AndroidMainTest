@@ -50,6 +50,9 @@
                 android:value=".activities.MainActivity_" />
         </activity>
 
+        <service android:name=".services.FeedService_"
+            android:enabled="true" android:exported="false" />
+
     </application>
 
 </manifest>

@@ -54,6 +54,6 @@ public class ServiceItemsAdapter extends RecyclerView.Adapter<ServiceItemsAdapte
 
     @Override
     public int getItemCount() {
-        return data.getTotalPages();
+        return data.getQuotesCount();
     }
 }

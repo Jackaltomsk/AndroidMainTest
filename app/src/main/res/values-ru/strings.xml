@@ -13,4 +13,6 @@
     <string name="context_menu_item_delete">Удалить</string>
     <string name="preferences_lang_list">Локализация</string>
     <string name="preferences_lang_list_summary">Список локализаций</string>
+    <string name="fragment_service_start_btn">Получить</string>
+    <string name="toast_feed_error_loading">Невозможно получить рассылку</string>
 </resources>

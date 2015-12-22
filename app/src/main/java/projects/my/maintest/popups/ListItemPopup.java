@@ -64,7 +64,7 @@ public class ListItemPopup extends android.widget.PopupWindow {
         createListeners();
         editText.setText(model.getText());
         this.setBackgroundDrawable(new ColorDrawable(ctx.getResources()
-                .getColor(R.color.background_material)));
+                .getColor(R.color.background_material_darker)));
         this.setFocusable(true);
         this.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }

@@ -16,6 +16,8 @@
     <string name="preferences_lang_list">Localization</string>
     <string name="preferences_lang_list_summary">List of language localizations</string>
     <string name="preferences_chosen_lang">preferences_chosen_lang</string>
+    <string name="fragment_service_start_btn">Get feed</string>
+    <string name="toast_feed_error_loading">Unable to download feed</string>
     <string-array name="locals">
         <item>en</item>
         <item>ru</item>

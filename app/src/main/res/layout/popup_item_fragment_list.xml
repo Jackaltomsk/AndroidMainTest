@@ -3,7 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/standard_element_half_margin"
-    android:paddingRight="@dimen/standard_element_half_margin">
+    android:paddingRight="@dimen/standard_element_half_margin"
+    >
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
